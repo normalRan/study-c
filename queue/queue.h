@@ -2,7 +2,10 @@
 #define QUEUE_H_
 #define MaxSize 5
 
-typedef int Item;
+typedef struct item {
+	long arrive;
+	int  processtime;
+}Item;
 
 typedef struct node {
 	Item item;	
