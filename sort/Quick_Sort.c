@@ -39,7 +39,6 @@ void Qsort(int A[], int left, int right) {
 	Qsort(A, L+1, right);
 }
 
-
 void Quick_Sort(int A[], int N) {
 	if (N == 1)
 		return;
