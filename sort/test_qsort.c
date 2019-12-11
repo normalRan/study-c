@@ -143,8 +143,7 @@ void value(int A[], int N) {
 
 int main() {
 	srand(time(0));
-	int n = rand()%10+1;
-	int A[n];
+	int A[7];
 	int N = sizeof(A)/sizeof(A[0]);
 	int i = 0;
 	start = clock();
