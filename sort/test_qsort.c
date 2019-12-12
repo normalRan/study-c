@@ -17,7 +17,9 @@
 /*                                          2019.12.11 00:54    */
 
 clock_t start, stop;
-double duration;
+double duration1;
+double duration2;
+double duration3;
 
 
 void Swap(int *a, int *b) {
@@ -138,32 +140,73 @@ void value(int A[], int N) {
 	srand(time(0));	
 	int i;
 	for (i=0; i<N; i++)	
-		A[i] = rand()%N+1;
+		A[i] = rand()%infinity+1;
+}
+
+int randN() {
+	srand(time(0));
+	return rand()%100;
+}
+
+double rank1(int A[], int N) {
+	int tmpA[N];
+	int i;
+	for (i=0; i<N; i++) 
+		tmpA[i++] = A[i++];
+	start = clock();
+	qsort_1(tmpA, N);
+	stop = clock();
+	return (double)(stop-start)/CLOCKS_PER_SEC;
+}
+
+double rank2(int A[], int N) {
+	int tmpA[N];
+	int i;
+	for (i=0; i<N; i++) 
+		tmpA[i++] = A[i++];
+	start = clock();
+	qsort_2(tmpA, N);
+	stop = clock();
+	return (double)(stop-start)/CLOCKS_PER_SEC;
+}
+
+double rank3(int A[], int N) {
+	int tmpA[N];
+	int i;
+	for (i=0; i<N; i++) 
+		tmpA[i++] = A[i++];
+	start = clock();
+	qsort_3(tmpA, N);
+	stop = clock();
+	return (double)(stop-start)/CLOCKS_PER_SEC;
 }
 
 int main() {
 	srand(time(0));
-	int A[7];
-	int N = sizeof(A)/sizeof(A[0]);
 	int i = 0;
 	start = clock();
 	while (i < infinity) {	
+		int	n = randN();
+		int A[n];
+		int N = sizeof(A)/sizeof(A[0]);
 		value(A, N);
-//		qsort_1(A, N);
-//		qsort_2(A, N);
-		qsort_3(A, N);
+		duration1 += rank1(A, N);	
+		duration2 += rank2(A, N);	
+		duration3 += rank3(A, N);	
 		i++;
 	} 
 	stop = clock();
-	duration = (double)(stop-start)/CLOCKS_PER_SEC;
-	printf("time consuming = %6.6f\n", duration);
-	for (i=0; i<N; i++)
+	printf("right hand :time consuming = %6.6f\n", duration1);
+	printf("random :time consuming = %6.6f\n", duration2);
+	printf("median :time consuming = %6.6f\n", duration3);
+/*	for (i=0; i<N; i++)
 		printf("%3d", A[i]);
 	printf("\n");
+*/
 
 }
 
-
+/*
 int main01() {
 	int A[7];
 	int i;
@@ -178,3 +221,4 @@ int main01() {
 	printf("\n");
 	return 0;
 }
+*/
